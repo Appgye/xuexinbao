@@ -27,7 +27,6 @@
             padding-bottom: 80px;
         }
 
-        /* 顶部导航 */
         .header {
             height: 50px;
             background: #fff;
@@ -35,9 +34,7 @@
             align-items: center;
             justify-content: center;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 1000;
             font-size: 18px;
             font-weight: 500;
@@ -47,8 +44,7 @@
         .header .back-icon {
             position: absolute;
             left: 15px;
-            width: 10px;
-            height: 10px;
+            width: 10px; height: 10px;
             border-left: 2px solid #666;
             border-bottom: 2px solid #666;
             transform: rotate(45deg);
@@ -58,22 +54,6 @@
             padding: 15px;
             margin-top: 50px;
         }
-
-        /* 专业满意度 Banner */
-        .banner {
-            background: linear-gradient(90deg, #ffb347, #ffcc33);
-            border-radius: 10px;
-            padding: 12px 15px;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .banner-text h4 { font-size: 16px; margin-bottom: 4px; }
-        .banner-text p { font-size: 12px; opacity: 0.9; }
 
         /* 绿色主卡片 */
         .main-card {
@@ -87,51 +67,55 @@
 
         .profile-section {
             display: flex;
-            align-items: flex-start; /* 顶部对齐 */
+            align-items: flex-start;
             gap: 12px;
             margin-bottom: 15px;
         }
 
-        /* 照片盒子固定尺寸，不缩放 */
+        /* 统一照片外层盒子 */
         .photo-box {
             width: 50px;
             flex-shrink: 0;
-            text-align: center;
-            font-size: 10px;
-            line-height: 1.2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .photo-placeholder {
+        /* 强制图片和占位层拥有完全一致的宽高和外观 */
+        .photo-item {
             width: 50px;
             height: 65px;
-            background: #eee;
+            background-color: #eee;
             border-radius: 4px;
-            margin-bottom: 6px;
             border: 1px solid rgba(255,255,255,0.3);
-            display: block;
+            display: block; /* 消除 img 的默认基线间距 */
             object-fit: cover;
+            margin-bottom: 6px;
         }
 
-        .person-photo {
-            width: 50px;
-            height: 65px;
+        /* 专门针对学历照片 SVG 的修整 */
+        .person-placeholder {
             background-color: var(--placeholder-gray);
-            border-radius: 4px;
-            margin-bottom: 6px;
-            border: 1px solid rgba(255,255,255,0.2);
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='38' r='23' fill='%23bcbcbc'/%3E%3Cpath d='M10 85 C20 65, 80 65, 90 85 L90 100 L10 100 Z' fill='%23bcbcbc'/%3E%3C/svg%3E");
-            background-size: 100% 100%;
-            background-position: center bottom;
+            /* 修复 viewBox 和圆心坐标，彻底防止遮挡 */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='35' r='22' fill='%23bcbcbc'/%3E%3Cpath d='M10 90 C15 60, 85 60, 90 90 L90 100 L10 100 Z' fill='%23bcbcbc'/%3E%3C/svg%3E");
+            background-size: 85% 85%;
+            background-position: center bottom 4px;
             background-repeat: no-repeat;
+        }
+
+        .photo-label {
+            font-size: 10px;
+            line-height: 1;
+            white-space: nowrap;
+            opacity: 0.95;
         }
 
         .user-info-top {
             flex: 1;
-            padding-top: 2px;
-            padding-left: 5px;
+            padding-left: 4px;
         }
 
-        .user-name { font-size: 18px; font-weight: 500; margin-bottom: 5px; }
+        .user-name { font-size: 18px; font-weight: 500; margin-bottom: 6px; margin-top: 2px; }
         .user-meta { font-size: 13px; opacity: 0.95; }
 
         .school-info-area {
@@ -144,53 +128,14 @@
         .degree-tag { background: rgba(0,0,0,0.15); font-size: 11px; padding: 2px 8px; border-radius: 10px; }
         .major-info { font-size: 13px; opacity: 0.9; }
 
-        /* 详细信息列表 */
-        .info-list {
-            padding: 0 5px;
-        }
+        /* 列表部分保持原样 */
+        .info-list { padding: 0 5px; }
+        .info-row { display: flex; margin-bottom: 16px; line-height: 1.4; }
+        .info-label { width: 100px; color: var(--text-sub); font-size: 15px; text-align: right; padding-right: 15px; flex-shrink: 0; }
+        .info-value { flex: 1; color: var(--text-main); font-size: 15px; word-break: break-all; }
 
-        .info-row {
-            display: flex;
-            margin-bottom: 16px;
-            line-height: 1.4;
-        }
-
-        .info-label {
-            width: 100px;
-            color: var(--text-sub);
-            font-size: 15px;
-            text-align: right;
-            padding-right: 15px;
-            flex-shrink: 0;
-        }
-
-        .info-value {
-            flex: 1;
-            color: var(--text-main);
-            font-size: 15px;
-            word-break: break-all;
-        }
-
-        /* 底部按钮 */
-        .footer-btn-container {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 12px 15px;
-            background: #f7f8fa;
-        }
-
-        .submit-btn {
-            background: var(--primary-green);
-            color: white;
-            text-align: center;
-            padding: 12px;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: 500;
-        }
-
+        .footer-btn-container { position: fixed; bottom: 0; left: 0; right: 0; padding: 12px 15px; background: #f7f8fa; }
+        .submit-btn { background: var(--primary-green); color: white; text-align: center; padding: 12px; border-radius: 4px; font-size: 16px; font-weight: 500; }
     </style>
 </head>
 <body>
@@ -201,22 +146,15 @@
 </div>
 
 <div class="container">
-    <div class="banner">
-        <div class="banner-text">
-            <h4>专业满意度 <span style="font-size: 11px; background: #fff; color: #f39c12; padding: 0px 5px; border-radius: 8px; margin-left:3px;">投票</span></h4>
-            <p>本专业的办学条件、教学质量、就业情况...</p>
-        </div>
-    </div>
-
     <div class="main-card">
         <div class="profile-section">
             <div class="photo-box">
-                <img class="photo-placeholder" src="xx.jpg" alt="">
-                <div>录取照片</div>
+                <img class="photo-item" src="xx.jpg" alt="">
+                <span class="photo-label">录取照片</span>
             </div>
             <div class="photo-box">
-                <div class="person-photo"></div>
-                <div>学历照片</div>
+                <div class="photo-item person-placeholder"></div>
+                <span class="photo-label">学历照片</span>
             </div>
             <div class="user-info-top">
                 <div class="user-name">暴嘉宁</div>
@@ -238,13 +176,8 @@
         <div class="info-row"><div class="info-label">证件号码</div><div class="info-value">210103200208121515</div></div>
         <div class="info-row"><div class="info-label">学制</div><div class="info-value">4 年</div></div>
         <div class="info-row"><div class="info-label">学历类别</div><div class="info-value">普通高等教育</div></div>
-        <div class="info-row"><div class="info-label">分院</div><div class="info-value">深圳校区</div></div>
-        <div class="info-row"><div class="info-label">系所</div><div class="info-value">--</div></div>
-        <div class="info-row"><div class="info-label">班级</div><div class="info-value">--</div></div>
-        <div class="info-row"><div class="info-label">学号</div><div class="info-value">24B071017</div></div>
         <div class="info-row"><div class="info-label">入学日期</div><div class="info-value">2025年09月01日</div></div>
         <div class="info-row"><div class="info-label">学籍状态</div><div class="info-value">在籍（注册学籍）</div></div>
-        <div class="info-row"><div class="info-label">预计毕业日期</div><div class="info-value">2029年06月10日</div></div>
     </div>
 </div>
 
